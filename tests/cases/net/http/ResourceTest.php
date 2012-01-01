@@ -7,9 +7,14 @@
  */
 
 namespace li3_rest\tests\cases\net\http;
+use li3_rest\net\http\Resource;
 
-class ResponseTest extends \lithium\test\Unit {
-	
+class ResourceTest extends \lithium\test\Unit {
+
+	public function testResourceConnect() {
+		$routes = Resource::connect('posts');
+		$this->assertEqual(7, count($routes));
+	}
 }
 
 ?>

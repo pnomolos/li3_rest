@@ -19,7 +19,7 @@ class Router extends \lithium\net\http\Router {
 		'route' => 'lithium\net\http\Route',
 		'resource' => 'li3_rest\net\http\Resource'
 	);
-	
+
 	public static function resource($resource, $options = array()) {
 		$class = static::$_classes['resource'];
 
