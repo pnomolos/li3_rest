@@ -2,7 +2,7 @@
 /**
  * Lithium: the most rad php framework
  *
- * @copyright     Copyright 2011, Union of RAD (http://union-of-rad.org)
+ * @copyright     Copyright 2012, Union of RAD (http://union-of-rad.org)
  * @license       http://opensource.org/licenses/bsd-license.php The BSD License
  */
 
@@ -59,7 +59,7 @@ class Resource extends \lithium\core\Object {
 	 * @var array
 	 */
 	protected static $_classes = array(
-		'route' => 'lithium\net\http\Route',
+		'route' => 'lithium\net\http\Route'
 	);
 
 	/**
@@ -100,6 +100,8 @@ class Resource extends \lithium\core\Object {
 
 	/**
 	 * Configure the class params like classes or types.
+	 *
+	 * @param array $config Optional configuration params.
 	 */
 	public static function config($config = array()) {
 		if (!$config) {
@@ -115,28 +117,30 @@ class Resource extends \lithium\core\Object {
 
 	/**
 	 * Connect a resource to the `Router`.
+	 *
+	 * @param string $resource The name of the resource
+	 * @param array $options
 	 */
 	public static function connect($resource, $options = array()) {
 		$resource = Inflector::tableize($resource);
 		$class = static::$_classes['route'];
 
 		$types = static::$_types;
-		if(isset($options['types'])) {
+		if (isset($options['types'])) {
 			$types = $options['types'] + $types;
 		}
 
 		$routes = array();
-		foreach(static::$_types as $action => $params) {
+		foreach (static::$_types as $action => $params) {
 			$config = array(
 				'template' => String::insert($params['template'], array('resource' => $resource)),
-				'params' => $params['params'] + array('controller' => $resource, 'action' => $action),
+				'params' => $params['params'] + array('controller' => $resource, 'action' => $action)
 			);
 			$routes[] = new $class($config);
 		}
 
 		return $routes;
 	}
-
 }
 
 ?>
