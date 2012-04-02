@@ -73,7 +73,7 @@ class Resource extends \lithium\core\Object {
 			'params' => array('http:method' => 'GET')
 		),
 		'show' => array(
-			'template' => '/{:resource}/{:id:[0-9a-f]{24}|[0-9]+}',
+			'template' => '/{:resource}/{:id:[0-9a-f]{24}|[0-9]+}(.{:type:\w+})*',
 			'params' => array('http:method' => 'GET')
 		),
 		'add' => array(
@@ -89,11 +89,11 @@ class Resource extends \lithium\core\Object {
 			'params' => array('http:method' => 'GET')
 		),
 		'update' => array(
-			'template' => '/{:resource}/{:id:[0-9a-f]{24}|[0-9]+}',
+			'template' => '/{:resource}/{:id:[0-9a-f]{24}|[0-9]+}(.{:type:\w+})*',
 			'params' => array('http:method' => 'PUT')
 		),
 		'delete' => array(
-			'template' => '/{:resource}/{:id:[0-9a-f]{24}|[0-9]+}',
+			'template' => '/{:resource}/{:id:[0-9a-f]{24}|[0-9]+}(.{:type:\w+})*',
 			'params' => array('http:method' => 'DELETE')
 		)
 	);
