@@ -137,6 +137,13 @@ class Resource extends \lithium\core\Object {
 				'params' => $params['params'] + array('controller' => $resource, 'action' => $action)
 			);
 			$routes[] = new $class($config);
+			if (strpos($params['template'], '(.{:type:\w+})*') !== FALSE) {
+				$config = array(
+					'template' => String::insert(str_replace('(.{:type:\w+})*', '', $params['template']), array('resource' => $resource)),
+					'params' => $params['params'] + array('controller' => $resource, 'action' => $action)
+				);
+				$routes[] = new $class($config);
+			}
 		}
 
 		return $routes;
