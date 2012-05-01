@@ -123,6 +123,7 @@ class Resource extends \lithium\core\Object {
 	 */
 	public static function connect($resource, $options = array()) {
 		$resource = Inflector::tableize($resource);
+		$controller = ucwords($resource);
 		$class = static::$_classes['route'];
 
 		$types = static::$_types;
@@ -134,13 +135,13 @@ class Resource extends \lithium\core\Object {
 		foreach (static::$_types as $action => $params) {
 			$config = array(
 				'template' => String::insert($params['template'], array('resource' => $resource)),
-				'params' => $params['params'] + array('controller' => $resource, 'action' => $action)
+				'params' => $params['params'] + array('controller' => $controller, 'action' => $action)
 			);
 			$routes[] = new $class($config);
 			if (strpos($params['template'], '(.{:type:\w+})*') !== FALSE) {
 				$config = array(
 					'template' => String::insert(str_replace('(.{:type:\w+})*', '', $params['template']), array('resource' => $resource)),
-					'params' => $params['params'] + array('controller' => $resource, 'action' => $action)
+					'params' => $params['params'] + array('controller' => $controller, 'action' => $action)
 				);
 				$routes[] = new $class($config);
 			}
